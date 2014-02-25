@@ -1,0 +1,48 @@
+<resources>
+
+    <style name="Match">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="Wrap">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="MatchWidth" parent="Wrap">
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <style name="MatchHeight" parent="Wrap">
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="MasterBuilderActionBar" parent="Widget.Sherlock.ActionBar">
+        <item name="android:background">#222222</item>
+        <item name="background">#222222</item>
+        <item name="android:titleTextStyle">@style/MasterBuilderTitleTextStyle</item>
+        <item name="titleTextStyle">@style/MasterBuilderTitleTextStyle</item>
+        <item name="android:subtitleTextStyle">@style/MasterBuilderSubtitleTextStyle</item>
+        <item name="subtitleTextStyle">@style/MasterBuilderSubtitleTextStyle</item>
+    </style>
+
+    <style name="MasterBuilderTransparentActionBar" parent="Widget.Sherlock.Light.ActionBar">
+        <item name="android:background">#00000000</item>
+        <item name="background">#00000000</item>
+        <item name="android:displayOptions">showTitle</item>
+        <item name="displayOptions">showTitle</item>
+    </style>
+
+    <style name="MasterBuilderTitleTextStyle" parent="@style/TextAppearance.Sherlock.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/lego_yellow</item>
+    </style>
+
+    <style name="MasterBuilderSubtitleTextStyle" parent="@style/TextAppearance.Sherlock.Widget.ActionBar.Subtitle">
+        <item name="android:textColor">@color/lego_yellow</item>
+    </style>
+
+    <style name="OverFlow" parent="@style/Widget.Sherlock.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_action_core_overflow</item>
+    </style>
+</resources>

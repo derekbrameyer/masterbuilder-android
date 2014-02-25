@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="default_padding">5dp</dimen>
+    <dimen name="default_padding_double">10dp</dimen>
+    <dimen name="default_padding_triple">15dp</dimen>
+
+    <dimen name="default_splash_padding">5dp</dimen>
+    <dimen name="default_grid_view_padding">5dp</dimen>
+
+    <dimen name="splash_font_size">64dp</dimen>
+    <dimen name="default_text_size">16sp</dimen>
+</resources>

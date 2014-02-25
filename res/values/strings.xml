@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Master Builder</string>
+
+    <string name="content_description">cd</string>
+
+    <string name="default_font" translateable="false">Roboto.ttf</string>
+    <string name="default_font_bold" translateable="false">Roboto-Bold.ttf</string>
+    <string name="default_font_light" translateable="false">Roboto-Light.ttf</string>
+    <string name="default_font_thin" translateable="false">Roboto-Thin.ttf</string>
+
+    <string name="io_exception">An I/O exception occurred. Please try again.</string>
+
+    <string name="master_c">MASTER</string>
+    <string name="builder_c">BUILDER</string>
+    <string name="downloading_instructions">Downloading instructions...\n(this can take a while, sorry!)</string>
+    <string name="done_excl">Done!</string>
+    <string name="about">About</string>
+    <string name="sort_alphabetically">Sort Alphabetically</string>
+    <string name="sort_by_steps_ascending">Sort by Steps Ascending</string>
+    <string name="sort_by_steps_descending">Sort by Steps Descending</string>
+    <string name="about_master_builder">About Master Builder</string>
+    <string name="about_copy">Do you have what it takes to become a Master Builder?  View dozens of instruction sets for LEGO models and follow along!  The instructions are sourced from the www.cubiculus.com database and will refresh once every three days.\n\nMake sure to sign in to Google+ to track achievements!</string>
+    <string name="congratulations_excl">Congratulations!</string>
+    <string name="congratulations_text">You are on your way to becoming a Master Builder!</string>
+    <string name="congratulations_with_sign_in_to_gplus">You are on your way to becoming a Master Builder!\n\nSign in to Google+ from the main list to unlock achievements!</string>
+    <string name="go_me">Go Me!</string>
+    <string name="building_instructions">Building Instructions</string>
+    <string name="step_n_of_k">%1$s: Step %2$s of %3$s</string>
+    <string name="default_name">Unnamed Set</string>
+    <string name="group_n">Group %1$s</string>
+    <string name="cancel">Cancel</string>
+    <string name="jump_to_group">Jump to Group</string>
+    <string name="total_steps">%1$s steps</string>
+    <string name="sign_in_to_gplus">Sign in to Google+ to access achievements!</string>
+    <string name="icon_attribution">&lt;a href="http://www.thenounproject.com/term/lego/3440/">Lego&lt;/a> designed by
+        &lt;a href="http://www.thenounproject.com/claxxmoldii" target="_blank">jon trillana&lt;/a>
+        from The Noun Project</string>
+    <string name="an_error_occurred">There was a problem contacting the Cubiculus database.  Please check your network connection and try again.</string>
+    <string name="retry">Retry</string>
+    <string name="refresh">Refresh</string>
+
+    <string name="sign_out">Sign Out From Google+</string>
+    <string name="gamehelper_sign_in_failed">Failed to sign in. Please check your network connection and try again.</string>
+    <string name="gamehelper_app_misconfigured">The application is incorrectly configured. Check that the package name and signing certificate match the client ID created in Developer Console. Also, if the application is not yet published, check that the account you are trying to sign in with is listed as a tester account. See logs for more information.</string>
+    <string name="gamehelper_license_failed">License check failed.</string>
+    <string name="gamehelper_unknown_error">Unknown error.</string>
+    <string name="achievements">Achievements</string>
+</resources>
+

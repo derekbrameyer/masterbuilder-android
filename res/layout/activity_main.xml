@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    style="@style/Match"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ProgressBar
+        style="@style/Widget.Sherlock.Light.ProgressBar"
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
+
+    <GridView
+        style="@style/Match"
+        android:id="@+id/grid_view"
+        android:divider="@null"
+        android:scrollbars="none"
+        android:numColumns="@integer/grid_columns"
+        android:horizontalSpacing="@dimen/default_grid_view_padding"
+        android:verticalSpacing="@dimen/default_grid_view_padding"
+        android:clipToPadding="false"
+        android:drawSelectorOnTop="true"
+        android:listSelector="@color/transparent"
+        android:fastScrollEnabled="true"
+        android:visibility="gone" />
+
+    <FrameLayout
+        android:id="@+id/sign_in_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true">
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/sign_in_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone" />
+    </FrameLayout>
+</RelativeLayout>

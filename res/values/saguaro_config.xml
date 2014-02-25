@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="mit_licensed_projects">
+        <item>Robolectric</item>
+    </string-array>
+    <string-array name="apache_2_0_licensed_projects">
+        <item>ActionBarSherlock</item>
+        <item>NineOldAndroids</item>
+        <item>OAK Android Kit</item>
+        <item>Roboguice</item>
+        <item>Roboguice-Sherlock</item>
+        <item>SystemBarTint</item>
+        <item>Universal Image Loader</item>
+    </string-array>
+    <string name="send_feedback_email">doom.on.a.fireball@gmail.com</string>
+</resources>

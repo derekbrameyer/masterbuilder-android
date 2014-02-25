@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="MasterBuilderTheme" parent="@style/Theme.Sherlock.Light.DarkActionBar">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:actionBarStyle">@style/MasterBuilderActionBar</item>
+        <item name="actionBarStyle">@style/MasterBuilderActionBar</item>
+        <item name="android:actionOverflowButtonStyle">@style/OverFlow</item>
+        <item name="actionOverflowButtonStyle">@style/OverFlow</item>
+        <item name="actionMenuTextColor">@color/lego_yellow</item>
+        <item name="android:actionMenuTextColor">@color/lego_yellow</item>
+    </style>
+
+    <style name="StepsTheme" parent="MasterBuilderTheme">
+        <item name="android:windowBackground">@color/white</item>
+    </style>
+
+    <style name="SplashTheme" parent="@style/Theme.Sherlock.Light.NoActionBar">
+        <item name="android:windowBackground">@color/lego_yellow</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+    <style name="AboutTheme" parent="@style/Theme.Sherlock.Light">
+        <item name="android:windowBackground">@color/lego_yellow</item>
+        <item name="android:actionBarStyle">@style/MasterBuilderTransparentActionBar</item>
+        <item name="actionBarStyle">@style/MasterBuilderTransparentActionBar</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="windowContentOverlay">@null</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+</resources>

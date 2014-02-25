@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    style="@style/Match"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:oak="http://oak/oak/schema"
+    android:background="@color/lego_yellow"
+    android:fillViewport="true">
+
+    <LinearLayout
+        style="@style/MatchWidth"
+        android:id="@+id/parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/yellow_two_four_small"
+            android:contentDescription="@string/content_description" />
+
+        <oak.widget.TextViewWithFont
+            android:id="@+id/about_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColorLink="@color/black"
+            android:text="@string/about_copy"
+            android:textSize="@dimen/default_text_size"
+            android:autoLink="all"
+            oak:font="@string/default_font" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/img_cubiculus"
+            android:contentDescription="@string/content_description" />
+
+        <oak.widget.TextViewWithFont
+            android:id="@+id/attribution"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColorLink="@color/black"
+            android:textSize="@dimen/default_text_size"
+            android:autoLink="all"
+            oak:font="@string/default_font" />
+
+        <com.willowtreeapps.saguaro.android.widget.VersionTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/default_text_size"
+            android:layout_marginTop="10dp" />
+
+        <com.willowtreeapps.saguaro.android.widget.AcknowledgmentsTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="@dimen/default_text_size"
+            android:textColorLink="@color/black" />
+
+        <com.willowtreeapps.saguaro.android.widget.SendFeedbackTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColorLink="@color/black"
+            android:textSize="@dimen/default_text_size"
+            android:layout_marginTop="10dp" />
+
+    </LinearLayout>
+</ScrollView>
