@@ -15,5 +15,5 @@ public class BuildingInstructions {
     @SerializedName("shortcutPicture") public String shortcutPicture;
     @SerializedName("stepGroups") public ArrayList<Step> steps;
 
-    public int stepsCount;
+    public Integer stepsCount = -1;
 }

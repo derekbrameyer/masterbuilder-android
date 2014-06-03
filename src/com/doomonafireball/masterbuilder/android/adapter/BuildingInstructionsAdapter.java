@@ -71,7 +71,7 @@ public class BuildingInstructionsAdapter extends BaseAdapter {
                 Collections.sort(mBuildingInstructions, new Comparator<BuildingInstructions>() {
                     @Override
                     public int compare(BuildingInstructions lhs, BuildingInstructions rhs) {
-                        return lhs.description.toLowerCase().compareTo(rhs.description.toLowerCase());
+                        return lhs.name.toLowerCase().compareTo(rhs.name.toLowerCase());
                     }
                 });
                 break;
@@ -134,9 +134,14 @@ public class BuildingInstructionsAdapter extends BaseAdapter {
         }
 
         BuildingInstructions bi = getItem(position);
-        holder.name.setText(bi.name);
-        holder.description.setText(bi.description);
-        holder.stepsCount.setText(String.format(nSteps, Integer.toString(bi.stepsCount)));
+        holder.name.setText(bi.description);
+        holder.description.setText(bi.name);
+        if (bi.stepsCount == null || bi.stepsCount == -1) {
+            holder.stepsCount.setVisibility(View.GONE);
+        } else {
+            holder.stepsCount.setText(String.format(nSteps, Integer.toString(bi.stepsCount)));
+            holder.stepsCount.setVisibility(View.VISIBLE);
+        }
         if (mCompletedSets.contains(bi.idInstruction)) {
             holder.checkmark.setVisibility(View.VISIBLE);
         } else {

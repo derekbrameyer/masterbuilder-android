@@ -12,6 +12,7 @@ import com.doomonafireball.masterbuilder.android.adapter.StepsPagerAdapter;
 import com.doomonafireball.masterbuilder.android.adapter.ThumbPhotoAdapter;
 import com.doomonafireball.masterbuilder.android.api.model.BuildingInstructions;
 import com.doomonafireball.masterbuilder.android.api.model.Step;
+import com.doomonafireball.masterbuilder.android.fragment.IndividualInstructionsApiFragment;
 import com.doomonafireball.masterbuilder.android.widget.FullScreenZoomSwankyGallery;
 import com.doomonafireball.masterbuilder.android.widget.ZoomImageView;
 import com.nineoldandroids.animation.ObjectAnimator;
@@ -25,6 +26,7 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.AdapterView;
@@ -41,7 +43,8 @@ import roboguice.inject.InjectView;
 /**
  * User: derek Date: 2/21/14 Time: 10:46 PM
  */
-public class StepsActivity extends BaseGameActivity implements View.OnClickListener {
+public class StepsActivity extends BaseGameActivity implements View.OnClickListener,
+        IndividualInstructionsApiFragment.IndividualInstructionsCallback {
 
     private static final String BUILDING_INSTRUCTIONS_JSON = "StepsActivity_BuildingInstructionsJson";
     private static final String CURRENT_PHOTO_INDEX = "PhotosFragment_CurrentPhotoIndex";
@@ -52,6 +55,8 @@ public class StepsActivity extends BaseGameActivity implements View.OnClickListe
     @InjectView(R.id.description) private TextView description;
     @InjectView(R.id.current_step) private TextView currentStep;
     @InjectView(R.id.view_sections) private ImageView viewSections;
+    @InjectView(R.id.progress) private View progress;
+    @InjectView(R.id.all_content) private View allContent;
 
     @InjectResource(R.string.achievement_baby_steps) private String achSet1;
     @InjectResource(R.string.achievement_come_with_me_if_you_want_to_not_die_) private String achSet5;
@@ -89,6 +94,8 @@ public class StepsActivity extends BaseGameActivity implements View.OnClickListe
 
     private SystemBarTintManager mTintManager;
 
+    private IndividualInstructionsApiFragment mIndividualInstructionsApiFragment;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,7 +120,7 @@ public class StepsActivity extends BaseGameActivity implements View.OnClickListe
         mBuildingInstructions = new Gson()
                 .fromJson(myIntent.getStringExtra(BUILDING_INSTRUCTIONS_JSON), BuildingInstructions.class);
 
-        getSupportActionBar().setTitle(mBuildingInstructions.description);
+        getSupportActionBar().setTitle(mBuildingInstructions.name);
         getSupportActionBar().setSubtitle(R.string.building_instructions);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -123,27 +130,47 @@ public class StepsActivity extends BaseGameActivity implements View.OnClickListe
             currentPosition = mDatastore.getCurrentStepForSetId(mBuildingInstructions.idInstruction);
         }
 
-        mImageUrls = new ArrayList<Pair<String, String>>();
-        for (Step step : mBuildingInstructions.steps) {
-            for (String filename : step.fileNames) {
-                mImageUrls.add(new Pair<String, String>(filename, step.name));
-            }
-        }
-
-        description.setText(mBuildingInstructions.description);
+        description.setText(mBuildingInstructions.name);
 
         viewSections.setOnClickListener(this);
 
-        populatePhotos();
+        FragmentManager fm = getSupportFragmentManager();
+        mIndividualInstructionsApiFragment = (IndividualInstructionsApiFragment) fm.findFragmentByTag("indiv");
 
-        setStepCountText();
+        // If the Fragment is non-null, then it is currently being
+        // retained across a configuration change.
+        if (mIndividualInstructionsApiFragment == null) {
+            // We need to fetch the data
+            mIndividualInstructionsApiFragment = new IndividualInstructionsApiFragment();
+            Bundle args = IndividualInstructionsApiFragment.getArgs(mBuildingInstructions);
+            mIndividualInstructionsApiFragment.setArguments(args);
+            fm.beginTransaction().add(mIndividualInstructionsApiFragment, "indiv").commit();
+        } else if (mIndividualInstructionsApiFragment.getBuildingInstructions() != null) {
+            // We've already fetched the data
+            mBuildingInstructions = mIndividualInstructionsApiFragment.getBuildingInstructions();
+
+            mImageUrls = new ArrayList<Pair<String, String>>();
+            for (Step step : mBuildingInstructions.steps) {
+                for (String filename : step.fileNames) {
+                    mImageUrls.add(new Pair<String, String>(filename, step.name));
+                }
+            }
+
+            populatePhotos();
+
+            setStepCountText();
+
+            progress.setVisibility(View.GONE);
+            allContent.setVisibility(View.VISIBLE);
+        } else {
+            // We're still fetching the data
+        }
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.view_sections:
-                // TODO Show ListView dialog with sections
                 final String[] groups = new String[mBuildingInstructions.steps.size()];
                 final int[] positions = new int[mBuildingInstructions.steps.size()];
                 int currentPosition = 0;
@@ -320,7 +347,12 @@ public class StepsActivity extends BaseGameActivity implements View.OnClickListe
     public boolean onCreateOptionsMenu(Menu menu) {
         getSupportMenuInflater().inflate(R.menu.steps_completed_menu, menu);
         mDoneMenuItem = menu.findItem(R.id.done);
-        mDoneMenuItem.setVisible(fullGallery.getPager().getCurrentItem() >= (mStepsPagerAdapter.getCount() - 1));
+        mDoneMenuItem.setVisible(false);
+        try {
+            mDoneMenuItem.setVisible(fullGallery.getPager().getCurrentItem() >= (mStepsPagerAdapter.getCount() - 1));
+        } catch (NullPointerException e) {
+            // This is due to the set not being fetched yet
+        }
         return true;
     }
 
@@ -458,5 +490,24 @@ public class StepsActivity extends BaseGameActivity implements View.OnClickListe
     @Override
     public void onSignInSucceeded() {
 
+    }
+
+    @Override
+    public void getBuildingInstructionsFinished(BuildingInstructions buildingInstructions) {
+        progress.setVisibility(View.GONE);
+        allContent.setVisibility(View.VISIBLE);
+
+        mBuildingInstructions = buildingInstructions;
+
+        mImageUrls = new ArrayList<Pair<String, String>>();
+        for (Step step : mBuildingInstructions.steps) {
+            for (String filename : step.fileNames) {
+                mImageUrls.add(new Pair<String, String>(filename, step.name));
+            }
+        }
+
+        populatePhotos();
+
+        setStepCountText();
     }
 }

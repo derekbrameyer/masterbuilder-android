@@ -7,6 +7,7 @@ import com.google.inject.Inject;
 
 import com.doomonafireball.masterbuilder.android.api.model.BuildingInstructions;
 import com.doomonafireball.masterbuilder.android.api.model.Step;
+import com.doomonafireball.masterbuilder.android.api.response.BuildingInstructionResponse;
 import com.doomonafireball.masterbuilder.android.api.response.BuildingInstructionsResponse;
 import com.squareup.okhttp.OkHttpClient;
 
@@ -29,6 +30,8 @@ public class CubiculusApi {
     private Gson mGson;
 
     private static final String BUILDING_INSTRUCTIONS_URL = "http://www.cubiculus.com/api-rest/building-instruction/%s";
+    private static final String BUILDING_INSTRUCTION_URL
+            = "http://www.cubiculus.com/api-rest/building-instruction/%s/%s";
 
     @Inject
     public CubiculusApi() {
@@ -54,28 +57,34 @@ public class CubiculusApi {
         }.getType();
         BuildingInstructionsResponse response = new BuildingInstructionsResponse();
         response.buildingInstructions = readJsonToObject(connection, collectionType);
-        parseBuildingInstructions(response.buildingInstructions, defaultName, groupN);
+        for (BuildingInstructions bi : response.buildingInstructions) {
+            parseIndividualBuildingInstructions(bi, defaultName, groupN);
+        }
         return response;
     }
 
-    private static void parseBuildingInstructions(ArrayList<BuildingInstructions> buildingInstructions,
-            String defaultName, String groupN) {
-        for (BuildingInstructions bi : buildingInstructions) {
-            parseIndividualBuildingInstructions(bi, defaultName, groupN);
-        }
+    public BuildingInstructionResponse getBuildingInstructions(String apiKey, String id, String defaultName,
+            String groupN) throws IOException {
+        HttpURLConnection connection = mOkHttpClient.open(new URL(String.format(BUILDING_INSTRUCTION_URL, apiKey, id)));
+        BuildingInstructionResponse response = new BuildingInstructionResponse();
+        response.buildingInstructions = readJsonToObject(connection, BuildingInstructions.class);
+        parseIndividualBuildingInstructions(response.buildingInstructions, defaultName, groupN);
+        return response;
     }
 
     public static void parseIndividualBuildingInstructions(BuildingInstructions buildingInstructions,
             String defaultName, String groupN) {
-        int numSteps = 0;
-        for (int i = 0; i < buildingInstructions.steps.size(); i++) {
-            Step s = buildingInstructions.steps.get(i);
-            if (TextUtils.isEmpty(s.name) || s.name.equals("null")) {
-                s.name = String.format(groupN, (i + 1));
+        if (buildingInstructions.steps != null) {
+            int numSteps = 0;
+            for (int i = 0; i < buildingInstructions.steps.size(); i++) {
+                Step s = buildingInstructions.steps.get(i);
+                if (TextUtils.isEmpty(s.name) || s.name.equals("null")) {
+                    s.name = String.format(groupN, (i + 1));
+                }
+                numSteps += s.fileNames.size();
             }
-            numSteps += s.fileNames.size();
+            buildingInstructions.stepsCount = numSteps;
         }
-        buildingInstructions.stepsCount = numSteps;
         if (TextUtils.isEmpty(buildingInstructions.description)) {
             buildingInstructions.description = defaultName;
         }

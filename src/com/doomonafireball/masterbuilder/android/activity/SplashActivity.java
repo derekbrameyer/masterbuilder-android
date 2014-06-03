@@ -5,7 +5,7 @@ import com.google.inject.Inject;
 import com.doomonafireball.masterbuilder.android.Datastore;
 import com.doomonafireball.masterbuilder.android.R;
 import com.doomonafireball.masterbuilder.android.api.model.BuildingInstructions;
-import com.doomonafireball.masterbuilder.android.fragment.ApiFragment;
+import com.doomonafireball.masterbuilder.android.fragment.AllInstructionsApiFragment;
 import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockFragmentActivity;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
@@ -15,6 +15,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Debug;
 import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
@@ -26,13 +27,13 @@ import roboguice.inject.InjectView;
 /**
  * User: derek Date: 2/21/14 Time: 8:41 PM
  */
-public class SplashActivity extends RoboSherlockFragmentActivity implements ApiFragment.Callback {
+public class SplashActivity extends RoboSherlockFragmentActivity implements AllInstructionsApiFragment.FetchAllInstructionsCallback {
 
     @InjectView(R.id.parent) View parent;
 
     @Inject Datastore mDatastore;
 
-    private ApiFragment mApiFragment;
+    private AllInstructionsApiFragment mApiFragment;
     private Handler mHandler = new Handler();
 
     private static final long THREE_DAYS_IN_MILLIS = 3 * 24 * 60 * 60 * 1000;
@@ -58,19 +59,19 @@ public class SplashActivity extends RoboSherlockFragmentActivity implements ApiF
         }
 
         FragmentManager fm = getSupportFragmentManager();
-        mApiFragment = (ApiFragment) fm.findFragmentByTag("api");
+        mApiFragment = (AllInstructionsApiFragment) fm.findFragmentByTag("api");
 
         // If the Fragment is non-null, then it is currently being
         // retained across a configuration change.
         if (mApiFragment == null) {
-            mApiFragment = new ApiFragment();
-            Bundle args = ApiFragment.getArgs(fetchData);
+            mApiFragment = new AllInstructionsApiFragment();
+            Bundle args = AllInstructionsApiFragment.getArgs(fetchData);
             mApiFragment.setArguments(args);
             fm.beginTransaction().add(mApiFragment, "api").commit();
         }
     }
 
-    public static void showErrorDialog(Context context, final ApiFragment apiFragment) {
+    public static void showErrorDialog(Context context, final AllInstructionsApiFragment apiFragment) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage(R.string.an_error_occurred);
         builder.setPositiveButton(R.string.retry, new DialogInterface.OnClickListener() {

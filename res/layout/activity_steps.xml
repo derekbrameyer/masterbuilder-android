@@ -4,59 +4,72 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.doomonafireball.masterbuilder.android.widget.FullScreenZoomSwankyGallery
-        style="@style/Match"
-        android:id="@+id/full_gallery"
-        android:gravity="center_vertical" />
-
-    <com.doomonafireball.masterbuilder.android.widget.FixedSizeGallery
-        android:id="@+id/thumb_gallery"
-        android:layout_width="match_parent"
+    <ProgressBar
+        style="@style/Widget.Sherlock.Light.ProgressBar"
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fadingEdge="none"
-        android:unselectedAlpha="100"
-        android:paddingTop="@dimen/default_padding"
-        android:paddingBottom="@dimen/default_padding"
-        android:spacing="6dp" />
+        android:layout_centerInParent="true" />
 
     <RelativeLayout
-        style="@style/MatchWidth"
-        android:id="@+id/content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/transparent_20_white">
+        style="@style/Match"
+        android:id="@+id/all_content"
+        android:visibility="invisible">
 
-        <ImageView
-            android:id="@+id/view_sections"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:background="@drawable/view_sections_bg"
-            android:src="@drawable/ic_collections_view_as_list"
-            android:layout_alignTop="@+id/description"
-            android:layout_alignBottom="@+id/current_step"
-            android:layout_alignParentRight="true" />
+        <com.doomonafireball.masterbuilder.android.widget.FullScreenZoomSwankyGallery
+            style="@style/Match"
+            android:id="@+id/full_gallery"
+            android:gravity="center_vertical" />
 
-        <oak.widget.TextViewWithFont
-            android:id="@id/description"
+        <com.doomonafireball.masterbuilder.android.widget.FixedSizeGallery
+            android:id="@+id/thumb_gallery"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@id/view_sections"
-            android:paddingLeft="@dimen/default_padding"
-            android:paddingRight="@dimen/default_padding"
-            android:textSize="24sp"
-            oak:font="@string/default_font_light" />
+            android:fadingEdge="none"
+            android:unselectedAlpha="100"
+            android:paddingTop="@dimen/default_padding"
+            android:paddingBottom="@dimen/default_padding"
+            android:spacing="6dp" />
 
-        <oak.widget.TextViewWithFont
-            android:id="@id/current_step"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/description"
-            android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@id/view_sections"
-            android:paddingLeft="@dimen/default_padding"
-            android:paddingRight="@dimen/default_padding"
-            android:textSize="14sp"
-            oak:font="@string/default_font_light" />
+        <RelativeLayout
+            style="@style/MatchWidth"
+            android:id="@+id/content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/transparent_20_white">
+
+            <ImageView
+                android:id="@+id/view_sections"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:background="@drawable/view_sections_bg"
+                android:src="@drawable/ic_collections_view_as_list"
+                android:layout_alignTop="@+id/description"
+                android:layout_alignBottom="@+id/current_step"
+                android:layout_alignParentRight="true" />
+
+            <oak.widget.TextViewWithFont
+                android:id="@id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@id/view_sections"
+                android:paddingLeft="@dimen/default_padding"
+                android:paddingRight="@dimen/default_padding"
+                android:textSize="24sp"
+                oak:font="@string/default_font_light" />
+
+            <oak.widget.TextViewWithFont
+                android:id="@id/current_step"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/description"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@id/view_sections"
+                android:paddingLeft="@dimen/default_padding"
+                android:paddingRight="@dimen/default_padding"
+                android:textSize="14sp"
+                oak:font="@string/default_font_light" />
+        </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>

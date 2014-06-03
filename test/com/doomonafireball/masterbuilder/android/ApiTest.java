@@ -3,6 +3,8 @@ package com.doomonafireball.masterbuilder.android;
 import com.google.inject.Injector;
 
 import com.doomonafireball.masterbuilder.android.api.CubiculusApi;
+import com.doomonafireball.masterbuilder.android.api.model.BuildingInstructions;
+import com.doomonafireball.masterbuilder.android.api.response.BuildingInstructionResponse;
 import com.doomonafireball.masterbuilder.android.api.response.BuildingInstructionsResponse;
 
 import junit.framework.Assert;
@@ -39,6 +41,14 @@ public class ApiTest {
                     .getBuildingInstructions(Robolectric.application.getString(R.string.api_key), "Unnamed Set",
                             "Group %1$s");
             Assert.assertNotNull(response.buildingInstructions);
+
+            if (response.buildingInstructions.size() > 0) {
+                BuildingInstructions bi = response.buildingInstructions.get(0);
+                BuildingInstructionResponse individualResponse = cubiculusApi.getBuildingInstructions(
+                        Robolectric.application.getString(R.string.api_key), bi.idInstruction, "Unnamed Set",
+                        "Group %1$s");
+                Assert.assertNotNull(individualResponse.buildingInstructions);
+            }
         } catch (IOException e) {
             e.printStackTrace();
             Assert.fail(e.toString());

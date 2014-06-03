@@ -7,18 +7,6 @@
         android:icon="@drawable/ic_action_navigation_refresh"
         android:showAsAction="ifRoom" />
     <item
-        android:id="@+id/sort_alphabetically"
-        android:title="@string/sort_alphabetically"
-        android:showAsAction="never" />
-    <item
-        android:id="@+id/sort_by_steps_ascending"
-        android:title="@string/sort_by_steps_ascending"
-        android:showAsAction="never" />
-    <item
-        android:id="@+id/sort_by_steps_descending"
-        android:title="@string/sort_by_steps_descending"
-        android:showAsAction="never" />
-    <item
         android:id="@+id/achievements"
         android:title="@string/achievements"
         android:showAsAction="never" />

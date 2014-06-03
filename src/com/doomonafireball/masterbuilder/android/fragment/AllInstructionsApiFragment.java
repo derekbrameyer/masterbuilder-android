@@ -22,9 +22,9 @@ import java.util.ArrayList;
 /**
  * User: derek Date: 11/22/13 Time: 2:46 PM
  */
-public class ApiFragment extends RoboSherlockFragment {
+public class AllInstructionsApiFragment extends RoboSherlockFragment {
 
-    public static interface Callback {
+    public static interface FetchAllInstructionsCallback {
 
         void getBuildingInstructionsFinished(ArrayList<BuildingInstructions> buildingInstructions);
 
@@ -34,7 +34,7 @@ public class ApiFragment extends RoboSherlockFragment {
     private static final String REFRESH_ON_CREATE = "ApiFragment_RefreshOnCreate";
 
     private ArrayList<BuildingInstructions> mBuildingInstructions;
-    private Callback mCallback;
+    private FetchAllInstructionsCallback mFetchAllInstructionsCallback;
     private GetBuildingInstructionsTask mGetBuildingInstructionsTask;
     private GetStoredDataTask mGetStoredDataTask;
 
@@ -77,13 +77,13 @@ public class ApiFragment extends RoboSherlockFragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        mCallback = (Callback) activity;
+        mFetchAllInstructionsCallback = (FetchAllInstructionsCallback) activity;
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mCallback = null;
+        mFetchAllInstructionsCallback = null;
     }
 
     public class GetStoredDataTask extends AsyncTask<Void, Void, Void> {
@@ -101,7 +101,7 @@ public class ApiFragment extends RoboSherlockFragment {
 
         @Override
         protected void onPostExecute(Void unused) {
-            mCallback.getStoredDataFinished(mBuildingInstructions);
+            mFetchAllInstructionsCallback.getStoredDataFinished(mBuildingInstructions);
         }
     }
 
@@ -113,7 +113,8 @@ public class ApiFragment extends RoboSherlockFragment {
             String apiKey = getString(R.string.api_key);
             try {
                 BuildingInstructionsResponse response = mCubiculusApi
-                        .getBuildingInstructions(apiKey, getString(R.string.default_name), getString(R.string.group_n));
+                        .getBuildingInstructions(apiKey, getString(R.string.default_name),
+                                getString(R.string.group_n));
                 mBuildingInstructions = response.buildingInstructions;
                 mDatastore.persistBuildingInstructionsJson(new Gson().toJson(mBuildingInstructions));
                 mDatastore.persistLastRefreshTimeMillis(System.currentTimeMillis());
@@ -126,7 +127,7 @@ public class ApiFragment extends RoboSherlockFragment {
 
         @Override
         protected void onPostExecute(Void unused) {
-            mCallback.getBuildingInstructionsFinished(mBuildingInstructions);
+            mFetchAllInstructionsCallback.getBuildingInstructionsFinished(mBuildingInstructions);
         }
     }
 }

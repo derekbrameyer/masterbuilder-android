@@ -11,7 +11,7 @@ import com.doomonafireball.masterbuilder.android.Datastore;
 import com.doomonafireball.masterbuilder.android.R;
 import com.doomonafireball.masterbuilder.android.adapter.BuildingInstructionsAdapter;
 import com.doomonafireball.masterbuilder.android.api.model.BuildingInstructions;
-import com.doomonafireball.masterbuilder.android.fragment.ApiFragment;
+import com.doomonafireball.masterbuilder.android.fragment.AllInstructionsApiFragment;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import android.content.Intent;
@@ -30,7 +30,8 @@ import java.util.Set;
 
 import roboguice.inject.InjectView;
 
-public class MainActivity extends BaseGameActivity implements ApiFragment.Callback, View.OnClickListener {
+public class MainActivity extends BaseGameActivity
+        implements AllInstructionsApiFragment.FetchAllInstructionsCallback, View.OnClickListener {
 
     @InjectView(R.id.progress) private ProgressBar progress;
     @InjectView(R.id.grid_view) private GridView gridView;
@@ -41,7 +42,7 @@ public class MainActivity extends BaseGameActivity implements ApiFragment.Callba
 
     private static final int ACHIEVEMENTS_INTENT_CODE = 42;
 
-    private ApiFragment mApiFragment;
+    private AllInstructionsApiFragment mApiFragment;
     private Gson mGson = new Gson();
 
     @Override
@@ -68,7 +69,7 @@ public class MainActivity extends BaseGameActivity implements ApiFragment.Callba
         }
 
         FragmentManager fm = getSupportFragmentManager();
-        mApiFragment = (ApiFragment) fm.findFragmentByTag("api");
+        mApiFragment = (AllInstructionsApiFragment) fm.findFragmentByTag("api");
 
         Set<String> completedSets = mDatastore.getCompletedSets();
         int sortingAlgorithm = mDatastore.getSortingAlgorithm();
@@ -76,8 +77,8 @@ public class MainActivity extends BaseGameActivity implements ApiFragment.Callba
         // If the Fragment is non-null, then it is currently being
         // retained across a configuration change.
         if (mApiFragment == null) {
-            mApiFragment = new ApiFragment();
-            Bundle args = ApiFragment.getArgs(false);
+            mApiFragment = new AllInstructionsApiFragment();
+            Bundle args = AllInstructionsApiFragment.getArgs(false);
             mApiFragment.setArguments(args);
             fm.beginTransaction().add(mApiFragment, "api").commit();
             gridView.setAdapter(new BuildingInstructionsAdapter(this, null, completedSets, sortingAlgorithm));
@@ -160,6 +161,7 @@ public class MainActivity extends BaseGameActivity implements ApiFragment.Callba
                 mApiFragment.fetchData();
                 setSupportProgressBarIndeterminateVisibility(true);
                 return true;
+            /*
             case R.id.sort_alphabetically:
                 mDatastore.persistSortingAlgorithm(BuildingInstructionsAdapter.SORT_ALPHABETICAL);
                 ((BuildingInstructionsAdapter) gridView.getAdapter()).setSortingAlgorithm(
@@ -178,6 +180,7 @@ public class MainActivity extends BaseGameActivity implements ApiFragment.Callba
                         .setSortingAlgorithm(BuildingInstructionsAdapter.SORT_STEPS_DESCENDING);
                 ((BuildingInstructionsAdapter) gridView.getAdapter()).notifyDataSetChanged();
                 return true;
+                */
             case R.id.achievements:
                 if (getGamesClient().isConnected()) {
                     startActivityForResult(getGamesClient().getAchievementsIntent(), ACHIEVEMENTS_INTENT_CODE);
