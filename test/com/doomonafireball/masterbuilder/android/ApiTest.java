@@ -2,10 +2,11 @@ package com.doomonafireball.masterbuilder.android;
 
 import com.google.inject.Injector;
 
-import com.doomonafireball.masterbuilder.android.api.CubiculusApi;
-import com.doomonafireball.masterbuilder.android.api.model.BuildingInstructions;
-import com.doomonafireball.masterbuilder.android.api.response.BuildingInstructionResponse;
-import com.doomonafireball.masterbuilder.android.api.response.BuildingInstructionsResponse;
+import com.doomonafireball.masterbuilderfree.android.R;
+import com.doomonafireball.masterbuilderfree.android.api.CubiculusApi;
+import com.doomonafireball.masterbuilderfree.android.api.model.BuildingInstructions;
+import com.doomonafireball.masterbuilderfree.android.api.response.BuildingInstructionResponse;
+import com.doomonafireball.masterbuilderfree.android.api.response.BuildingInstructionsResponse;
 
 import junit.framework.Assert;
 

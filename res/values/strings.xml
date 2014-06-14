@@ -46,5 +46,11 @@
     <string name="gamehelper_license_failed">License check failed.</string>
     <string name="gamehelper_unknown_error">Unknown error.</string>
     <string name="achievements">Achievements</string>
+
+    <string name="i_have_my_own_api_key">I have my own API key!</string>
+    <string name="input_your_api_key">Input your API key</string>
+    <string name="cubiculus_com_api_key">cubiculus.com API key</string>
+    <string name="set">Set</string>
+    <string name="cancel">Cancel</string>
 </resources>
 

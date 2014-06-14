@@ -16,12 +16,12 @@
         android:id="@+id/all_content"
         android:visibility="invisible">
 
-        <com.doomonafireball.masterbuilder.android.widget.FullScreenZoomSwankyGallery
+        <com.doomonafireball.masterbuilderfree.android.widget.FullScreenZoomSwankyGallery
             style="@style/Match"
             android:id="@+id/full_gallery"
             android:gravity="center_vertical" />
 
-        <com.doomonafireball.masterbuilder.android.widget.FixedSizeGallery
+        <com.doomonafireball.masterbuilderfree.android.widget.FixedSizeGallery
             android:id="@+id/thumb_gallery"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -21,3 +21,4 @@ gen-external-apklibs/
 tmp/
 res/values/protected_strings.xml
 release.keystore
+masterbuilder.keystore
