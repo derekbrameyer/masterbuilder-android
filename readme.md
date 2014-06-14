@@ -1,5 +1,12 @@
 [![Master Builder Feature Graphic](https://raw.github.com/derekbrameyer/masterbuilder-android/master/imagery/feature_graphic_1024x500.png
-)](https://play.google.com/store/apps/details?id=com.doomonafireball.masterbuilderfree.android)
+)](http://derekbrameyer.github.io/masterbuilder-android)
+
+## [View the site](http://derekbrameyer.github.io/masterbuilder-android)
+
+<a href="https://play.google.com/store/apps/details?id=com.doomonafireball.masterbuilderfree.android">
+  <img alt="Master Builder on Google Play"
+         src="http://developer.android.com/images/brand/en_app_rgb_wo_45.png" />
+</a>
 
 An open-source Android app that provides LEGO set building instructions sourced from the www.cubiculus.com database.
 
