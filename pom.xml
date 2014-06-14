@@ -15,7 +15,7 @@
         </platform.version>
 
         <!-- you'll need to generate a keystore and put it at the root of your project and change these -->
-        <sign.keystore>release.keystore</sign.keystore>
+        <sign.keystore>masterbuilder.keystore</sign.keystore>
         <sign.keyalias>release</sign.keyalias>
         <app.versioncode>3</app.versioncode>
 
