@@ -83,7 +83,7 @@ body {
   border-radius: 4px;
   border: 1px solid #ccc;
   background-origin: content-box;
-  background-color: #fff;
+  background-color: rgba(255,255,255,0.5);
   background-image: url(onplay.png);
   background-repeat: no-repeat;
   background-size: cover;
@@ -96,12 +96,12 @@ body {
 }
 
   #playlink:hover {
-    background-color: #eee;
+    background-color: rgba(255,255,255,0.75);
     background-position: 50% 100%;
   }
 
   #playlink:active {
-    bottom: 99px;
+    bottom: 89px;
     box-shadow: 0 0 0;
   }
 
@@ -115,7 +115,7 @@ body {
   border-radius: 4px;
   border: 1px solid #ccc;
   background-origin: content-box;
-  background-color: #fff;
+  background-color: rgba(255,255,255,0.5);
   background-image: url(ongithub.png);
   background-repeat: no-repeat;
   background-size: cover;
@@ -128,12 +128,12 @@ body {
 }
 
   #githublink:hover {
-    background-color: #eee;
+    background-color: rgba(255,255,255,0.75);
     background-position: 50% 100%;
   }
 
   #githublink:active {
-    bottom: 99px;
+    bottom: 19px;
     box-shadow: 0 0 0;
   }
 
